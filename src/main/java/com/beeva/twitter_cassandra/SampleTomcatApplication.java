@@ -17,6 +17,10 @@
 package com.beeva.twitter_cassandra;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,11 +76,14 @@ public class SampleTomcatApplication implements CommandLineRunner{
 			
 	        public void onStatus(Status status) {
 	        	tweetsProcessed++;
-	             TweetPrimaryKey tweetPrimaryKey = new TweetPrimaryKey(status.getUser().getId(),status.getCreatedAt());
-	            Tweet tweet = new Tweet(status.getUser().getName(), status.getText(),1);
+	            TweetPrimaryKey tweetPrimaryKey = new TweetPrimaryKey(status.getUser().getId(),status.getCreatedAt());
+	            Tweet tweet = new Tweet(status.getUser().getName(), Arrays.asList(status.getText()),1);
 	            if (tweetRepository.exists(tweetPrimaryKey)){
 	            	tweet = tweetRepository.findOne(tweetPrimaryKey);
 	            	tweet.setNumEvents(tweet.getNumEvents()+1);
+	            	List<String> texts = new ArrayList<String>(tweet.getTexts());
+	            	texts.add(status.getText());
+	            	tweet.setTexts(texts);
 	            } else {
 	            	tweet.setPk(tweetPrimaryKey);
 	            	tweetsCreated++;

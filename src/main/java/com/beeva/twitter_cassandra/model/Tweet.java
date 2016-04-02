@@ -1,5 +1,9 @@
 package com.beeva.twitter_cassandra.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
@@ -18,18 +22,18 @@ public class Tweet {
 	@Column(value = "name")
 	private String name;
 
-	@Column(value = "text")
-	private String text;
+	@Column(value = "texts")
+	private List<String> texts;
 	
 	@Column(value = "num_events")
 	private int numEvents;
 	
 	
 
-	public Tweet( String name, String text,int numEvents) {
+	public Tweet( String name, List<String> texts,int numEvents) {
 		super();
 		this.name = name;
-		this.text = text;
+		this.texts = texts;
 		this.numEvents = numEvents;
 	}
 
@@ -49,13 +53,6 @@ public class Tweet {
 		this.name = name;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
 
 	public int getNumEvents() {
 		return numEvents;
@@ -63,6 +60,20 @@ public class Tweet {
 
 	public void setNumEvents(int numEvents) {
 		this.numEvents = numEvents;
+	}
+
+	/**
+	 * @return the texts
+	 */
+	public List<String> getTexts() {
+		return texts;
+	}
+
+	/**
+	 * @param texts the texts to set
+	 */
+	public void setTexts(List<String> texts) {
+		this.texts = texts;
 	}
 
 }
