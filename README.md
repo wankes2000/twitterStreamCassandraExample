@@ -4,23 +4,23 @@
 
 #### Start First Cassandra Server
 ```
-docker run --name first-cassandra -d cassandra:latest
+docker run --name first-cassandra -d cassandra:2
 ```
 
 #### Start Second Cassandra Server
 ```
-docker run --name second-cassandra -d --link first-cassandra:cassandra cassandra:latest
+docker run --name second-cassandra -d --link first-cassandra:cassandra cassandra:2
 ```
 
 #### Obtanin Cassandra Docker Container IP
 ```
-docker inspect yourContainerName
+docker inspect first-cassandra
 ```
 
 #### Log into Cassandra Docker Container
 
 ```
-docker exec -t -i yourContainerName /bin/bash
+docker exec -t -i first-cassandra /bin/bash
 ```
 
 #### Running App
