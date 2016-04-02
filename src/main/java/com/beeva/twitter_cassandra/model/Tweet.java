@@ -6,7 +6,7 @@ import org.springframework.data.cassandra.mapping.Table;
 
 /**
  * CREATE TABLE tweets ( user_id bigint, name varchar, text varchar, date
- * timestamp, PRIMARY KEY(user_id,date)) with CLUSTERING ORDER BY (date DESC);
+ * timestamp,num_events int, PRIMARY KEY(user_id,date)) with CLUSTERING ORDER BY (date DESC);
  */
 
 @Table("tweets")
