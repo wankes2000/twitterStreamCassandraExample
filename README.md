@@ -2,9 +2,14 @@
 
 
 
-#### Start Cassandra Server
+#### Start First Cassandra Server
 ```
-docker run -d spotify/cassandra
+docker run --name first-cassandra -d cassandra:latest
+```
+
+#### Start Second Cassandra Server
+```
+docker run --name second-cassandra -d --link first-cassandra:cassandra cassandra:latest
 ```
 
 #### Obtanin Cassandra Docker Container IP
@@ -16,4 +21,10 @@ docker inspect yourContainerName
 
 ```
 docker exec -t -i yourContainerName /bin/bash
+```
+
+#### Running App
+
+```
+mvn spring-boot:run
 ```
